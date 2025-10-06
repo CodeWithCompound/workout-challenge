@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Workout Challange App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="dayCounter">Day 1</div>
+    <div id="difficultyDisplay">normal</div>
+    <button class="difficultySlider" id="dUp" title="Make it harder"></button>
+    <button class="difficultySlider" id="dDown" title="Make it easier"></button>
+    <div id="showLastDay">show last day</div>
+    <div id="displayBest">Best streak: 0</div>
+    <button class="conditionBtn" id="questFailedBtn">
+      Restart, mission failed!
+    </button>
+    <div id="dailyMission"></div>
+    <button class="conditionBtn" id="questCompletetBtn">
+      Next Day, success!
+    </button>
+    <button id="settingsBtn">settings</button>
+    <div id="themeSelector">
+      <button class="colorsTheme" id="bisque"></button>
+      <button class="colorsTheme" id="pink"></button>
+      <button class="colorsTheme" id="wip">
+        please note that this section is still WIP c:
+      </button>
+    </div>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
