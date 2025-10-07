@@ -9,7 +9,7 @@ const dDown = document.getElementById("dDown");
 const showLastDay = document.getElementById("showLastDay");
 const settingsBtn = document.getElementById("settingsBtn");
 const themeSelector = document.getElementById("themeSelector");
-// still have to do document.querySelector for the colors & add the logic
+const colorsTheme = document.querySelectorAll(".colorsTheme");
 
 let toggleLastDay = false;
 let toggleSettings = false;
@@ -135,6 +135,12 @@ function resetLogic() {
   plank = 0;
 }
 
+colorsTheme.forEach((button) => {
+  button.addEventListener("click", () => {
+    document.body.style.backgroundColor = button.id;
+  });
+});
+
 questCompletetBtn.addEventListener("click", () => {
   getDayInfo();
   chooseKind();
@@ -170,3 +176,4 @@ showLastDay.addEventListener("click", () => {
   }
 });
 dailyMission.innerHTML = `Today you need to tackle: <br> ${pushup} pushups!!`;
+// 7th oct: made the background selector actually function and added more colors to it!
