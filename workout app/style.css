@@ -182,8 +182,29 @@ body {
 #pink:hover {
   background-color: rgb(255, 169, 184);
 }
+#aquamarine {
+  top: 60px;
+  background-color: aquamarine;
+}
+#aquamarine:hover {
+  background-color: rgb(102, 204, 170);
+}
+#burlywood {
+  top: 80px;
+  background-color: burlywood;
+}
+#burlywood:hover {
+  background-color: rgb(176, 146, 107);
+}
+#darkseagreen {
+  top: 100px;
+  background-color: darkseagreen;
+}
+#darkseagreen:hover {
+  background-color: rgb(109, 145, 109);
+}
 
 #wip {
   font-size: x-small;
-  top: 60px;
+  top: 200px;
 }
