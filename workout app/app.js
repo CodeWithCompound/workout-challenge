@@ -13,6 +13,7 @@ const colorsTheme = document.querySelectorAll(".colorsTheme");
 
 let toggleLastDay = false;
 let toggleSettings = false;
+let autoHideTimer;
 let day = 1;
 let best = 0;
 let pushup = 10;
@@ -154,11 +155,24 @@ questFailedBtn.addEventListener("click", () => {
 });
 
 settingsBtn.addEventListener("click", () => {
+  //maybe add a setting to disable auto-hide
+  clearTimeout(autoHideTimer);
+
+  autoHideTimer = setTimeout(() => {
+    themeSelector.style.left = "110%";
+    toggleSettings = false;
+    console.log(toggleSettings);
+  }, 10000);
+
+  settingsBtn.style.scale = "110%";
+  setTimeout(() => {
+    settingsBtn.style.scale = "100%";
+  }, 300);
   toggleSettings = !toggleSettings;
   if (toggleSettings) {
-    themeSelector.style.display = "block";
+    themeSelector.style.left = "90%";
   } else {
-    themeSelector.style.display = "none";
+    themeSelector.style.left = "110%";
   }
   console.log(toggleSettings);
 });
@@ -175,5 +189,5 @@ showLastDay.addEventListener("click", () => {
     showLastDay.innerHTML = `return to today`;
   }
 });
-dailyMission.innerHTML = `Today you need to tackle: <br> ${pushup} pushups!!`;
+
 // 7th oct: made the background selector actually function and added more colors to it!
