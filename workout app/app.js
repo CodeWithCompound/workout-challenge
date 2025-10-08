@@ -10,7 +10,15 @@ const showLastDay = document.getElementById("showLastDay");
 const settingsBtn = document.getElementById("settingsBtn");
 const themeSelector = document.getElementById("themeSelector");
 const colorsTheme = document.querySelectorAll(".colorsTheme");
+const clearLs = document.getElementById("clearLs");
+// really important: add local storage (for best day streak, difficulty & settings being remembered!!!
+// made local storage for best day and background color, still working on clearLs btn, future update: add local storage for all the different workouts to be able to go back where you left each day even when closing the tab.
+//TEST BELOW
 
+let lsBest = "bestStreak";
+let lsThemes = "themeColor";
+
+// add a setting to disable auto-hide: line ~160
 let toggleLastDay = false;
 let toggleSettings = false;
 let autoHideTimer;
@@ -26,7 +34,13 @@ let plank = 0;
 let lastPlank = 0;
 let difficultyMulti = 1;
 let difficulty = 1;
-
+//TEST BELOW
+let savedBest = Number(localStorage.getItem(lsBest)) || 0;
+best = savedBest;
+displayBest.innerHTML = `Best streak: ${best}`;
+let savedTheme = localStorage.getItem(lsThemes);
+if (savedTheme) document.body.style.backgroundColor = savedTheme;
+// works
 let msg = "";
 let lastMsg = "";
 function getMsg() {
@@ -116,7 +130,9 @@ dDown.addEventListener("click", () => {
 function dayUpdateLogic() {
   getMsg();
   day++;
-  day > best ? best++ : "";
+  best = Math.max(best, day);
+  // TEST BELOW
+  localStorage.setItem(lsBest, String(best));
   displayBest.innerHTML = `Best streak: ${best}`;
   console.log("best:" + best);
   dayCounter.innerHTML = `Day ${day}`;
@@ -139,6 +155,7 @@ function resetLogic() {
 colorsTheme.forEach((button) => {
   button.addEventListener("click", () => {
     document.body.style.backgroundColor = button.id;
+    localStorage.setItem(lsThemes, button.id);
   });
 });
 
@@ -155,11 +172,11 @@ questFailedBtn.addEventListener("click", () => {
 });
 
 settingsBtn.addEventListener("click", () => {
-  //maybe add a setting to disable auto-hide
   clearTimeout(autoHideTimer);
 
   autoHideTimer = setTimeout(() => {
     themeSelector.style.left = "110%";
+    clearLs.style.left = "110%";
     toggleSettings = false;
     console.log(toggleSettings);
   }, 10000);
@@ -168,11 +185,14 @@ settingsBtn.addEventListener("click", () => {
   setTimeout(() => {
     settingsBtn.style.scale = "100%";
   }, 300);
+
   toggleSettings = !toggleSettings;
   if (toggleSettings) {
     themeSelector.style.left = "90%";
+    clearLs.style.left = "90%";
   } else {
     themeSelector.style.left = "110%";
+    clearLs.style.left = "110%";
   }
   console.log(toggleSettings);
 });
