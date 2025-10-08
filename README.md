@@ -4,3 +4,4 @@ This is my first GitHub project. A small but functional workout challenge app. T
 What i learned:
 - forEach and querySelector
 - using setIntervals 
+- first used localStorage
