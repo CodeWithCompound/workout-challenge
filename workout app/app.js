@@ -11,12 +11,20 @@ const settingsBtn = document.getElementById("settingsBtn");
 const themeSelector = document.getElementById("themeSelector");
 const colorsTheme = document.querySelectorAll(".colorsTheme");
 const clearLs = document.getElementById("clearLs");
-// really important: add local storage (for best day streak, difficulty & settings being remembered!!!
-// made local storage for best day and background color, still working on clearLs btn, future update: add local storage for all the different workouts to be able to go back where you left each day even when closing the tab.
+// CURRENTLY MANY BUGS THANKS TO LOCAL STORAGE: NOT FINISHED YET!! WORKING ON IT <3
+// completed: really important: add local storage (for best day streak, difficulty & settings being remembered!!!
+// to-do: difficulty for local storage saved
+// to-do: get rid of any repeating codet that could be a function (really looking forward to that...)
+// to-do: when reloading first time call local storage (currently: only when button is clicked)
 //TEST BELOW
-
+// for local storage
+let lsDay = "currentDay";
 let lsBest = "bestStreak";
 let lsThemes = "themeColor";
+let lsPushup = "pushups";
+let lsPullups = "pullups";
+let lsSquats = "squats";
+let lsPlank = "plank";
 
 // add a setting to disable auto-hide: line ~160
 let toggleLastDay = false;
@@ -34,13 +42,24 @@ let plank = 0;
 let lastPlank = 0;
 let difficultyMulti = 1;
 let difficulty = 1;
-//TEST BELOW
+
+// current -> 51: local storage stuff
+let savedDay = Number(localStorage.getItem(lsDay));
 let savedBest = Number(localStorage.getItem(lsBest)) || 0;
-best = savedBest;
 displayBest.innerHTML = `Best streak: ${best}`;
+let savedPushups = Number(localStorage.getItem(lsPushup)) || 0;
+let savedPullups = Number(localStorage.getItem(lsPullups)) || 0;
+let savedSquats = Number(localStorage.getItem(lsSquats)) || 0;
+let savedPlank = Number(localStorage.getItem(lsPlank)) || 0;
+day = savedDay;
+best = savedBest;
+pushup = savedPushups;
+pullups = savedPullups;
+squats = savedSquats;
+plank = savedPlank;
 let savedTheme = localStorage.getItem(lsThemes);
 if (savedTheme) document.body.style.backgroundColor = savedTheme;
-// works
+
 let msg = "";
 let lastMsg = "";
 function getMsg() {
@@ -127,12 +146,22 @@ dDown.addEventListener("click", () => {
   updateDifficulty();
   difficultySelectorAnimation(dDown);
 });
+//prevent repeating code function below!!
+function saveToLocalStorage(lsAny, original) {
+  localStorage.setItem(lsAny, String(original));
+}
 function dayUpdateLogic() {
   getMsg();
   day++;
   best = Math.max(best, day);
-  // TEST BELOW
-  localStorage.setItem(lsBest, String(best));
+  // current -> 156: local storage stuff
+  saveToLocalStorage(lsDay, day);
+  saveToLocalStorage(lsBest, best);
+  saveToLocalStorage(lsPullups, pushup);
+  saveToLocalStorage(lsPullups, pullups);
+  saveToLocalStorage(lsSquats, squats);
+  saveToLocalStorage(lsPlank, plank);
+
   displayBest.innerHTML = `Best streak: ${best}`;
   console.log("best:" + best);
   dayCounter.innerHTML = `Day ${day}`;
