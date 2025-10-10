@@ -145,6 +145,7 @@ body {
 #showLastDay:hover {
   width: 8.5%;
   cursor: pointer;
+  background-color: rgb(195, 195, 195);
 }
 
 #themeSelector {
@@ -263,4 +264,57 @@ body {
 }
 #clearLs:hover {
   background-color: red;
+}
+
+#confirmWindow {
+  display: none;
+  position: absolute;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: azure;
+  left: 50%;
+  top: 50%;
+  width: 90%;
+  height: 25%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  transition: 0.8s ease;
+}
+
+#bgConfirmWindow {
+  display: none;
+
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 2;
+}
+#deleteText {
+  position: absolute;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  text-align: centers;
+  font-size: xxx-large;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+.deleteBtns {
+  display: none;
+  position: inherit;
+  bottom: 5%;
+  width: 200px;
+  height: 65px;
+  z-index: 2;
+  transition: 0.8s ease;
+}
+#deleteNo {
+  left: 15%;
+}
+#deleteYes {
+  right: 15%;
 }
