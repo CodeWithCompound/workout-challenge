@@ -12,14 +12,12 @@ const themeSelector = document.getElementById("themeSelector");
 const colorsTheme = document.querySelectorAll(".colorsTheme");
 const clearLs = document.getElementById("clearLs");
 // CURRENTLY MANY BUGS THANKS TO LOCAL STORAGE: NOT FINISHED YET!! WORKING ON IT <3
-// completed: really important: add local storage (for best day streak, difficulty & settings being remembered!!!
-// to-do: difficulty for local storage saved
-// to-do: get rid of any repeating codet that could be a function (really looking forward to that...)
-// to-do: when reloading first time call local storage (currently: only when button is clicked)
+// to-do: get rid of any repeating code that could be a function & polish (really looking forward to that...)
 //TEST BELOW
 // for local storage
 let lsDay = "currentDay";
 let lsBest = "bestStreak";
+let lsDifficulty = "difficulty";
 let lsThemes = "themeColor";
 let lsPushup = "pushups";
 let lsPullups = "pullups";
@@ -47,12 +45,15 @@ let difficulty = 1;
 let savedDay = Number(localStorage.getItem(lsDay));
 let savedBest = Number(localStorage.getItem(lsBest)) || 0;
 displayBest.innerHTML = `Best streak: ${best}`;
-let savedPushups = Number(localStorage.getItem(lsPushup)) || 0;
+let savedDifficulty = Number(localStorage.getItem(lsDifficulty)) || 1;
+
+let savedPushups = Number(localStorage.getItem(lsPushup)) || 10;
 let savedPullups = Number(localStorage.getItem(lsPullups)) || 0;
 let savedSquats = Number(localStorage.getItem(lsSquats)) || 0;
 let savedPlank = Number(localStorage.getItem(lsPlank)) || 0;
 day = savedDay;
 best = savedBest;
+difficulty = savedDifficulty;
 pushup = savedPushups;
 pullups = savedPullups;
 squats = savedSquats;
@@ -83,13 +84,11 @@ const difficultyLevels = [
 
 function updateDifficulty() {
   difficulty = Math.max(0.35, difficulty);
-  const d = difficulty;
+  const level = difficultyLevels.find((l) => difficulty <= l.max);
 
-  const level = difficultyLevels.find((l) => d <= l.max);
-
-  difficultyDisplay.innerHTML = `${level.label} (${d.toFixed(1)})`;
+  difficultyDisplay.innerHTML = `${level.label} (${difficulty.toFixed(1)})`;
   difficultyDisplay.style.color = level.color;
-  console.log("difficulty:", d);
+  console.log("difficulty:", difficulty);
 }
 
 function perDayAdd(kind) {
@@ -138,11 +137,13 @@ function difficultySelectorAnimation(element) {
 }
 dUp.addEventListener("click", () => {
   difficulty = difficulty + 0.2;
+  saveToLocalStorage(lsDifficulty, difficulty);
   updateDifficulty();
   difficultySelectorAnimation(dUp);
 });
 dDown.addEventListener("click", () => {
   difficulty = difficulty - 0.2;
+  saveToLocalStorage(lsDifficulty, difficulty);
   updateDifficulty();
   difficultySelectorAnimation(dDown);
 });
@@ -154,10 +155,10 @@ function dayUpdateLogic() {
   getMsg();
   day++;
   best = Math.max(best, day);
-  // current -> 156: local storage stuff
+  // current -> 165: local storage stuff
   saveToLocalStorage(lsDay, day);
   saveToLocalStorage(lsBest, best);
-  saveToLocalStorage(lsPullups, pushup);
+  saveToLocalStorage(lsPushup, pushup);
   saveToLocalStorage(lsPullups, pullups);
   saveToLocalStorage(lsSquats, squats);
   saveToLocalStorage(lsPlank, plank);
@@ -175,10 +176,16 @@ function getDayInfo() {
 }
 function resetLogic() {
   day = 0;
-  pushup = 10;
+  pushup = 0;
   pullups = 0;
   squats = 0;
   plank = 0;
+
+  savedDay = 0;
+  savedPushups = 0;
+  savedPullups = 0;
+  savedSquats = 0;
+  savedPlank = 0;
 }
 
 colorsTheme.forEach((button) => {
@@ -240,3 +247,5 @@ showLastDay.addEventListener("click", () => {
 });
 
 // 7th oct: made the background selector actually function and added more colors to it!
+dailyMission.innerHTML = `Today you need to tackle: <br> ${pushup} pushups <br> ${pullups} pullups <br> ${squats} sqats <br> ${plank} seconds of plank <br><br> <b>${msg}</b>`;
+updateDifficulty();
