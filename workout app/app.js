@@ -11,6 +11,10 @@ const settingsBtn = document.getElementById("settingsBtn");
 const themeSelector = document.getElementById("themeSelector");
 const colorsTheme = document.querySelectorAll(".colorsTheme");
 const clearLs = document.getElementById("clearLs");
+const bgConfirmWindow = document.getElementById("bgConfirmWindow");
+const confirmWindow = document.getElementById("confirmWindow");
+const deleteNo = document.getElementById("deleteNo");
+const deleteYes = document.getElementById("deleteYes");
 // CURRENTLY MANY BUGS THANKS TO LOCAL STORAGE: NOT FINISHED YET!! WORKING ON IT <3
 // to-do: get rid of any repeating code that could be a function & polish (really looking forward to that...)
 //TEST BELOW
@@ -25,6 +29,7 @@ let lsSquats = "squats";
 let lsPlank = "plank";
 
 // add a setting to disable auto-hide: line ~160
+let toggleDeleteLs = false;
 let toggleLastDay = false;
 let toggleSettings = false;
 let autoHideTimer;
@@ -249,3 +254,38 @@ showLastDay.addEventListener("click", () => {
 // 7th oct: made the background selector actually function and added more colors to it!
 dailyMission.innerHTML = `Today you need to tackle: <br> ${pushup} pushups <br> ${pullups} pullups <br> ${squats} sqats <br> ${plank} seconds of plank <br><br> <b>${msg}</b>`;
 updateDifficulty();
+
+function areYouSure() {}
+clearLs.addEventListener("click", () => {
+  toggleDeleteLs = !toggleDeleteLs;
+
+  if (toggleDeleteLs) {
+    bgConfirmWindow.style.display = "block";
+    confirmWindow.style.display = "block";
+    deleteYes.style.display = "block";
+    deleteNo.style.display = "block";
+  } else {
+    bgConfirmWindow.style.display = "none";
+    confirmWindow.style.display = "none";
+    deleteYes.style.display = "none";
+    deleteNo.style.display = "none";
+  }
+});
+deleteNo.addEventListener("click", () => {
+  toggleDeleteLs = !toggleDeleteLs;
+  bgConfirmWindow.style.display = "none";
+  confirmWindow.style.display = "none";
+  deleteYes.style.display = "none";
+  deleteNo.style.display = "none";
+});
+
+deleteYes.addEventListener("click", () => {
+  toggleDeleteLs = !toggleDeleteLs;
+  bgConfirmWindow.style.display = "none";
+  confirmWindow.style.display = "none";
+  deleteYes.style.display = "none";
+  deleteNo.style.display = "none";
+  resetLogic();
+  localStorage.clear();
+  location.href = location.pathname + "? reload=" + new Date().getTime();
+});
