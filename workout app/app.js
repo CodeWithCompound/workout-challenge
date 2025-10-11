@@ -82,9 +82,9 @@ const difficultyLevels = [
   { max: 2.5, label: "death", color: "rgb(90,0,0)" },
   { max: 3.0, label: "death +", color: "rgb(120,0,0)" },
   { max: 3.5, label: "death ++", color: "rgb(150,0,0)" },
-  { max: 4.0, label: "death +++", color: "rgb(200,0,0)" },
-  { max: 4.5, label: "hell", color: "rgb(180,0,0)" },
-  { max: Infinity, label: "hell", color: "rgb(180,0,0)" },
+  { max: 4.0, label: "death +++", color: "rgb(180,0,0)" },
+  { max: 4.5, label: "hell", color: "rgb(200,0,0)" },
+  { max: Infinity, label: "hell", color: "rgb(200,0,0)" },
 ];
 
 function updateDifficulty() {
@@ -158,8 +158,6 @@ function saveToLocalStorage(lsAny, original) {
 }
 function dayUpdateLogic() {
   getMsg();
-  day++;
-  best = Math.max(best, day);
   // current -> 165: local storage stuff
   saveToLocalStorage(lsDay, day);
   saveToLocalStorage(lsBest, best);
@@ -201,6 +199,8 @@ colorsTheme.forEach((button) => {
 });
 
 questCompletetBtn.addEventListener("click", () => {
+  day++;
+  best = Math.max(best, day);
   getDayInfo();
   chooseKind();
   dayUpdateLogic();
@@ -289,3 +289,5 @@ deleteYes.addEventListener("click", () => {
   localStorage.clear();
   location.href = location.pathname + "? reload=" + new Date().getTime();
 });
+
+dayUpdateLogic();
