@@ -7,29 +7,18 @@ I’m still pretty new to programming, so if you peek at my code and feel the su
 
 What I learned building this:
 
-forEach and querySelector
+- forEach and querySelector
+- Using setInterval
+- First time using localStorage
+- The deep emotional pain of one missing semicolon
 
-Using setInterval
-
-First time using localStorage
-
-Basic logic structuring and DOM manipulation
-
-The deep emotional pain of one missing semicolon
-
-
-How to run
+# How to run
 
 Since I’m using ES modules, you can’t just double-click index.html and run it — that’ll throw MIME-type tantrums and ruin your day. You’ll need to run it through a local server instead.
 
-Easiest way (VS Code – Live Server)
-
-Install the Live Server extension in VS Code (by Ritwick Dey).
-
-Open this project folder in VS Code.
-
-Right-click index.html then select "Open with Live Server".
-
-It should launch automatically in your browser ( something like http://127.0.0.1:5500/).
+1. Install the Live Server extension in VS Code (by Ritwick Dey).
+2. Open this project folder in VS Code.
+3. Right-click index.html then select "Open with Live Server".
+4. It should launch automatically in your browser ( something like http://127.0.0.1:5500/).
 
 That’s it! Have fun 
