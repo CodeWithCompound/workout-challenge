@@ -1,6 +1,6 @@
 # workout-challenge
 ![Workout Challenge Preview](./preview.png)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 This is my first GitHub project! a small but functional workout challenge app. The core features work just as they should (most of the time), though the app’s still a bit of a work in progress. Super proud to finally share this as my first public project here on GitHub!
 
 I’m still pretty new to programming, so if you peek at my code and feel the sudden urge to facepalm, please go easy on me. 😅 If you spot any questionable code crimes, do let me know — I promise I’ll serve my sentence and fix them.
