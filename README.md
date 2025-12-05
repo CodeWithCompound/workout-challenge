@@ -18,10 +18,13 @@ it's my first github project! a small but functional workout challenge app. the 
 ## Features
 
 ![done](https://img.shields.io/badge/status-done-brightgreen)
-- ...
+- functional challange system that gives you a challange every day increasing in difficulty as time passes!
+- settings which allow you to change the background color & clear local storage
+- view the last day to see the difference
+- fully working (as far as i know...) 
 
 ![wip](https://img.shields.io/badge/status-WIP-blue)
-- ...
+- nothing, it's complete!
 
 ---
 
